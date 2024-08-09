@@ -1,0 +1,5 @@
+¿Qué diferencia encuentra entre las implementaciones de los puntos anteriores?
+
+ Principal diferencia que noto en las implementaciones es que en la lista enlazada es necesario
+que se inicialize ya que si no se hace esto no se puede recorrer.
+

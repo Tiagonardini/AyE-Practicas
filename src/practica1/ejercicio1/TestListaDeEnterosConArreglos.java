@@ -13,7 +13,15 @@ public class TestListaDeEnterosConArreglos {
        for (int i = 0; i < listaDeEnteros.tamanio(); i++){
            System.out.printf(listaDeEnteros.proximo().toString());
        }
+        System.out.printf("\n");
 
+       recorrerALaInversa(listaDeEnteros, listaDeEnteros.tamanio());
     }
 
+    public static void recorrerALaInversa(ListaDeEnterosConArreglos lista, int indice) {
+        if (indice > 0) {
+            System.out.printf(lista.elemento(indice).toString());
+            recorrerALaInversa(lista, indice - 1);
+        }
+    }
 }

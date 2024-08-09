@@ -11,12 +11,8 @@ public class TestListaDeEnterosEnlazada {
         listaDeEnteros.agregarFinal(5);
 
         listaDeEnteros.comenzar();
-        while (!listaDeEnteros.esVacia()) {
-            if (!listaDeEnteros.fin()) {
-                System.out.printf(listaDeEnteros.proximo().toString());
-
-            }
-
+        while (!listaDeEnteros.fin()) {
+            System.out.printf(listaDeEnteros.proximo().toString());
         }
     }
 }
