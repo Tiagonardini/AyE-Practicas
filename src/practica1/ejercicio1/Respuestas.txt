@@ -3,3 +3,41 @@
  Principal diferencia que noto en las implementaciones es que en la lista enlazada es necesario
 que se inicialize ya que si no se hace esto no se puede recorrer.
 
+a - ¿Podría darle comportamiento a algún método de la superclase
+    ListaDeEnteros? ¿Por qué la clase se define como abstracta? Note que una
+    subclase implementa la lista usando un arreglo de tamaño fijo y la otra usando
+    nodos enlazados.
+
+RTA: Se podria dar comportamiento desde la superclase en el caso de que haya un comportamiento en comun entre
+     las clases hijas. La clase se define como abstracta porque ListaDeEnteros es una clase conceptual que
+     proporciona la estructura básica para todas las listas de enteros, pero no implementa detalles
+     específicos sobre cómo almacenar los datos o cómo realizar las operaciones.
+     Cada subclase (ListaDeEnterosConArreglos y ListaDeEnterosEnlazada) implementa estos detalles de
+     manera diferente.
+
+b - Considerando los enlaces entre nodos, ¿qué diferencias existen entre agregar un nodo al principio de
+    la lista, agregar un nodo en el medio y agregar un nodo al final?
+
+RTA: En una lista enlazada, las diferencias entre agregar un nodo en diferentes posiciones son las siguientes:
+
+         Agregar un nodo al principio:
+             Se crea un nuevo nodo.
+             El siguiente del nuevo nodo apunta al nodo que actualmente es el primero (inicio).
+             El puntero inicio se actualiza para apuntar al nuevo nodo.
+             Si la lista estaba vacía, el nuevo nodo es también el fin.
+
+         Agregar un nodo en el medio:
+             Se crea un nuevo nodo.
+             Se recorre la lista hasta encontrar el nodo en la posición anterior a la deseada.
+             El siguiente del nuevo nodo se apunta al nodo que está actualmente en la posición deseada.
+             El siguiente del nodo anterior se actualiza para apuntar al nuevo nodo.
+
+         Agregar un nodo al final:
+             Se crea un nuevo nodo.
+             El siguiente del nodo fin actual se actualiza para apuntar al nuevo nodo.
+             El puntero fin se actualiza para apuntar al nuevo nodo.
+             Si la lista estaba vacía, el nuevo nodo es también el inicio.
+
+c- Una lista implementada con arreglos, ¿tiene su primer elemento en el índice del vector:
+   0, 1 o depende de la implementación?
+
