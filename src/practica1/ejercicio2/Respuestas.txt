@@ -1,0 +1,12 @@
+a) Diferencias entre ListaEnlazadaGenerica y ListaDeEnterosEnlazada:
+ListaEnlazadaGenerica es una implementación genérica que puede almacenar
+cualquier tipo de dato gracias al uso de parámetros de tipo <T>, lo que la hace
+más flexible y reutilizable. Por otro lado, ListaDeEnterosEnlazada está específicamente
+diseñada para manejar enteros (Integer), lo que la limita a un solo tipo de dato.
+Esta diferencia permite que ListaEnlazadaGenerica sea aplicable en una variedad más amplia de situaciones.
+
+b) Definición y creación de instancias del nodo genérico:
+El nodo genérico se define utilizando un parámetro de tipo <T>, lo que permite que el nodo almacene un dato de cualquier tipo especificado en tiempo de compilación. Este enfoque hace que la estructura de datos sea altamente flexible y reutilizable. Para crear una instancia de un nodo genérico, se debe especificar el tipo de dato en el momento de la creación, como por ejemplo NodoGenerico<Integer> nodo = new NodoGenerico<>();, donde Integer es el tipo de dato que el nodo almacenará.
+
+c) Comportamiento del método elemento(int pos) en la lista:
+El método elemento(int pos) de la lista devuelve el dato almacenado en la posición especificada dentro de la lista enlazada. Si la posición solicitada es válida (dentro del rango de la lista), el método recorre la lista hasta llegar a la posición indicada y retorna el valor del nodo en esa posición. Si la posición es inválida (fuera del rango de la lista), el método devuelve null, lo que indica que no se encontró ningún elemento en esa posición.

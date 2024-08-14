@@ -21,5 +21,10 @@ public class TestListaEnlazadaGenerica {
             listaGenerica.proximo().tusDatos();
         }
 
+        Estudiante [] estudiantes = {estudiante1, estudiante2, estudiante3, estudiante4};
+        listaGenerica.comenzar();
+        boolean seAgrego = listaGenerica.agregar(estudiantes);
+        System.out.print(seAgrego);
+
     }
 }

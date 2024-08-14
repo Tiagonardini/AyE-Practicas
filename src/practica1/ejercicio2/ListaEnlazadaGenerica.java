@@ -212,14 +212,12 @@ public class ListaEnlazadaGenerica<T> extends ListaGenerica<T> {
 	@Override
 	public boolean agregar(T[] arreglo) {
 		boolean todosAgregados = true;
-
 		for (T elem : arreglo) {
 			boolean agregado = this.agregarFinal(elem);
 			if (!agregado) {
 				todosAgregados = false;
 			}
 		}
-
 		return todosAgregados;
 	}
 
