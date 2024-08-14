@@ -17,14 +17,15 @@ public class TestListaDeEnterosEnlazada {
             System.out.printf(listaDeEnteros.proximo().toString());
         }
 
-
-        recorrerALaInversa(listaDeEnteros, inicioLista);
+        listaDeEnteros.comenzar();
+        recorrerALaInversa(listaDeEnteros);
     }
 
-    public static void recorrerALaInversa(ListaDeEnterosEnlazada lista, int pos){
-        if (pos <= lista.tamanio()){
-            recorrerALaInversa(lista, pos + 1);
-            System.out.printf(" "+lista.elemento(pos).toString());
+    public static void recorrerALaInversa(ListaDeEnterosEnlazada lista){
+        if (!lista.esVacia()){
+            System.out.println(lista.elemento(lista.tamanio()));
+            lista.eliminar(lista.tamanio());
+            recorrerALaInversa(lista);
         }
 
     }

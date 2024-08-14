@@ -15,13 +15,15 @@ public class TestListaDeEnterosConArreglos {
        }
         System.out.printf("\n");
 
-       recorrerALaInversa(listaDeEnteros, listaDeEnteros.tamanio());
+       listaDeEnteros.comenzar();
+       recorrerALaInversa(listaDeEnteros);
     }
 
-    public static void recorrerALaInversa(ListaDeEnterosConArreglos lista, int indice) {
-        if (indice > 0) {
-            System.out.printf(lista.elemento(indice).toString());
-            recorrerALaInversa(lista, indice - 1);
+    public static void recorrerALaInversa(ListaDeEnterosConArreglos lista) {
+        if (!lista.fin()) {
+            System.out.printf(lista.elemento(lista.tamanio()).toString());
+            lista.eliminar(lista.tamanio());
+            recorrerALaInversa(lista);
         }
     }
 }
