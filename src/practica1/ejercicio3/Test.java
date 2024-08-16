@@ -14,16 +14,6 @@ public class Test {
         cola.tope();
 
         cola.desencolar();
-System.out.println();
-        PilaGenerica<Integer> pila = new PilaGenerica<>();
-
-        pila.apilar(10);
-        pila.apilar(20);
-        pila.apilar(30);
-
-        pila.tope();
-
-        pila.desapilar();
 
     }
 
