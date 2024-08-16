@@ -15,6 +15,16 @@ public class Test {
 
         cola.desencolar();
 
+        PilaGenerica<Integer> pila = new PilaGenerica<>();
+
+        // Encolar elementos
+        pila.apilar(10);
+        pila.apilar(20);
+        pila.apilar(30);
+
+        pila.tope();
+
+        pila.desapilar();
     }
 
 
