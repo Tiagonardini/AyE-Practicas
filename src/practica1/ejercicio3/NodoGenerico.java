@@ -6,10 +6,7 @@ public class NodoGenerico<T> {
     private T dato;
     private NodoGenerico<T> siguiente;
 
-    public NodoGenerico(T dato) {
-        this.dato = dato;
-        this.siguiente = null;
-    }
+
 
     public T getDato() {
         return dato;
