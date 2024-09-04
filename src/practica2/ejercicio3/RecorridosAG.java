@@ -13,8 +13,6 @@ public class RecorridosAG {
             listaNumeros.agregarInicio(dato);
 //        }
         listaHijos = a.getHijos();
-        listaHijos.comenzar();
-
         if (!listaHijos.esVacia()) { // Verificar que la lista no esté vacía antes de comenzar
             listaHijos.comenzar();
             while (!listaHijos.fin()) {

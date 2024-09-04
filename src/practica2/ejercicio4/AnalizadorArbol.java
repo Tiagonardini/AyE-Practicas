@@ -1,16 +1,14 @@
 package practica2.ejercicio4;
 import practica1.ejercicio3.ColaGenerica;
-import practica1.ejercicio3.ListaEnlazadaGenerica;
 import practica1.ejercicio3.ListaGenerica;
 import practica2.ejercicio3.ArbolGeneral;
-import practica2.ejercicio3.RecorridosAG;
+
 
 public class AnalizadorArbol {
      public int devolverMaximoPromedio(ArbolGeneral<AreaEmpresa> arbol) {
             if (arbol.esVacio()) { //verifico si el arbol esta vacio
                 return 0; // en caso de estarlo el maximo promedio es cero
             }
-
             int maxPromedio = 0; // se inicializa en cero el maximo promedio
             ColaGenerica<ArbolGeneral<AreaEmpresa>> cola = new ColaGenerica<>();
             cola.encolar(arbol); // encolamos el nodo raiz
