@@ -107,7 +107,7 @@ public class MainParcial {
 
             // Buscar el camino desde Ayuntamiento hasta Museo Vikingo en menos de 120 minutos
             VisitaOslo visitaOslo = new VisitaOslo();
-            ListaGenerica<String> camino = visitaOslo.paseoEnBici(grafo, "Museo Vikingo", 150, lugaresRestringidos);
+            ListaGenerica<String> camino = visitaOslo.paseoEnBici(grafo, "Museo Vikingo", 120, lugaresRestringidos);
 
             // Imprimir el camino encontrado
             if (camino.esVacia()) {

@@ -5,55 +5,48 @@ import practica2.ejercicio3.ArbolGeneral;
 
 
 public class AnalizadorArbol {
-    public int devolverMaximoPromedio(ArbolGeneral<AreaEmpresa> arbol) {
-        if (arbol == null) {
-            return 0;
-        }
+    public int devolverMaximoPromedio(ArbolGeneral<AreaEmpresa> nodoArbol) {
+        int contadorDeNodos =0;
+        int totalNivel = 0;
+        int maxProm =0;
+        int nivelProm= 0;
+        int nivel = 0;
+        // INICIALIZO LOS CONTADORES QUE VOY A UTILIZAR
 
-        ListaGenerica<ArbolGeneral<AreaEmpresa>> listaDeHijos;
         ColaGenerica<ArbolGeneral<AreaEmpresa>> cola = new ColaGenerica<>();
-        cola.encolar(arbol);
-        cola.encolar(null); // Usamos null como delimitador de nivel
+        cola.encolar(nodoArbol);
+        cola.encolar(null);
 
-        int sumaDeNivel = 0;
-        int cantidadDeNodosNivel = 0;
-        double maxPromedio = 0;
-
-        while (!cola.esVacia()) {
-            ArbolGeneral<AreaEmpresa> nodo = cola.desencolar();
-
-            if (nodo == null) {
-                // Fin del nivel actual
-                double promedioNivel = sumaDeNivel / (double) cantidadDeNodosNivel;
-                if (promedioNivel > maxPromedio) {
-                    maxPromedio = promedioNivel;
+        while (!cola.esVacia()){
+            ArbolGeneral<AreaEmpresa> nodoAux = cola.desencolar();
+            if (nodoAux == null){
+                nivelProm =  totalNivel /  contadorDeNodos;
+                System.out.println("El promedio: "+nivelProm+" pertenece al nivel: "+nivel);
+                if (maxProm < nivelProm){
+                    maxProm = nivelProm;
                 }
-
-                // Reiniciar para el siguiente nivel
-                sumaDeNivel = 0;
-                cantidadDeNodosNivel = 0;
-
-                // Si aún hay elementos en la cola, encolar el delimitador para el próximo nivel
-                if (!cola.esVacia()) {
+                contadorDeNodos =0;
+                nivelProm = 0;
+                nivel++;
+                if (!cola.esVacia()){
                     cola.encolar(null);
                 }
-            } else {
-                // Procesar el nodo actual
-                sumaDeNivel += nodo.getDato().getTiempoDeTransmision(); // Suponiendo que getValor() obtiene el valor del dato
-                cantidadDeNodosNivel++;
-
-                // Encolar los hijos del nodo actual
-                if (nodo.tieneHijos()) {
-                    listaDeHijos = nodo.getHijos();
-                    listaDeHijos.comenzar();
-                    while (!listaDeHijos.fin()) {
-                        cola.encolar(listaDeHijos.proximo());
-                    }
+            }else{
+                totalNivel += nodoAux.getDato().getTiempoDeTransmision();
+                ListaGenerica<ArbolGeneral<AreaEmpresa>> listaDeHijos = nodoAux.getHijos();
+                contadorDeNodos++;
+                while (!listaDeHijos.fin()){
+                    cola.encolar(listaDeHijos.proximo());
                 }
             }
+
         }
 
-        return (int) maxPromedio;
+
+        return (int) maxProm;
+
+
+
     }
 
 
@@ -93,7 +86,7 @@ public class AnalizadorArbol {
 
         var resultado = analizador.devolverMaximoPromedio(arbol);
 
-        System.out.println("el promedio maximo es: "+resultado);
+        System.out.println("El promedio maximo es: "+resultado);
     }
 
 }
