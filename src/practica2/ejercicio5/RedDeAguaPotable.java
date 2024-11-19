@@ -1,80 +1,63 @@
 package practica2.ejercicio5;
 import practica1.ejercicio3.ListaEnlazadaGenerica;
+import practica1.ejercicio3.ListaGenerica;
 import practica2.ejercicio3.ArbolGeneral;
 
 
 
 public class RedDeAguaPotable {
-    private ArbolGeneral<Double> red;
-    private ListaEnlazadaGenerica<Double> listaNumeros;
-
-    public RedDeAguaPotable(ArbolGeneral<Double> arbolGeneral){
-        this.red = arbolGeneral;
-        this.listaNumeros = new ListaEnlazadaGenerica<>();
-    }
 
 
-    public double minimoCaudal(double caudal) {
-        if (red.esVacio()) {
-            return 0;
+
+    public RedDeAguaPotable( ){
+
+     }
+
+
+    public double minimoCaudal(double caudal, ArbolGeneral<String> nodoArbol) {
+        if (nodoArbol.esHoja()){
+            return caudal;
         }
-        var listaDeNodosHojas = recorrerRed(this.red, caudal, this.listaNumeros);
-        var caudalMaschico = listaDeNodosHojas.proximo();
-        listaDeNodosHojas.comenzar();
-        while (!listaDeNodosHojas.esVacia() && !listaDeNodosHojas.fin()){
-            var dato = listaDeNodosHojas.proximo();
-            if (caudalMaschico > dato){
-                caudalMaschico = dato;
+        ListaGenerica<ArbolGeneral<String>> lHijos = nodoArbol.getHijos();
+        double caudalPorHijo = caudal/lHijos.tamanio();
+        double minCaudal = 0;
+
+        lHijos.comenzar();
+        while (!lHijos.fin()){
+            ArbolGeneral<String> hijo = lHijos.proximo();
+            minCaudal = minimoCaudal(caudalPorHijo, hijo);
+            if (caudalPorHijo < minCaudal){
+                minCaudal = caudalPorHijo;
             }
         }
-        System.out.println("El caudal de aguas mas pequeño es: "+caudalMaschico);
-        return caudalMaschico;
-    }
+        return minCaudal;
 
-    private ListaEnlazadaGenerica<Double> recorrerRed(ArbolGeneral<Double> red, double caudal, ListaEnlazadaGenerica<Double> listaNumeros) {
-        var hijos = red.getHijos();
-
-        var cantHijos = hijos.tamanio();
-        var casaCaudal = cantHijos / caudal;
-
-        if (red.esHoja()) {
-          listaNumeros.agregarFinal(red.getDato());
-        }
-        hijos.comenzar();
-        if (!hijos.esVacia()){
-            while (!hijos.fin()){
-                ArbolGeneral<Double> nodoActual = hijos.proximo();
-                recorrerRed(nodoActual, casaCaudal, listaNumeros);
-            }
         }
 
-
-        return listaNumeros;
-    }
 
     public static void main(String[] args) {
 
 
-        ArbolGeneral<Double> arbol = new ArbolGeneral<>(1000.0);
+        ArbolGeneral<String> arbol = new ArbolGeneral<>("A");
 
-        ArbolGeneral<Double> hijoB = new ArbolGeneral<>(250.0);
-        ArbolGeneral<Double> hijoC = new ArbolGeneral<>(250.0);
-        ArbolGeneral<Double> hijoD = new ArbolGeneral<>(250.0);
-        ArbolGeneral<Double> hijoE = new ArbolGeneral<>(250.0);
+        ArbolGeneral<String> hijoB = new ArbolGeneral<>("B");
+        ArbolGeneral<String> hijoC = new ArbolGeneral<>("C");
+        ArbolGeneral<String> hijoD = new ArbolGeneral<>("D" );
+        ArbolGeneral<String> hijoE = new ArbolGeneral<>("E" );
 
-        ArbolGeneral<Double> hijoF = new ArbolGeneral<>(125.0);
-        ArbolGeneral<Double> hijoG = new ArbolGeneral<>(125.0);
+        ArbolGeneral<String> hijoF = new ArbolGeneral<>("F");
+        ArbolGeneral<String> hijoG = new ArbolGeneral<>("G");
 
-        ArbolGeneral<Double> hijoH = new ArbolGeneral<>(50.0);
-        ArbolGeneral<Double> hijoI = new ArbolGeneral<>(50.0);
-        ArbolGeneral<Double> hijoJ = new ArbolGeneral<>(50.0);
-        ArbolGeneral<Double> hijoK = new ArbolGeneral<>(50.0);
-        ArbolGeneral<Double> hijoO = new ArbolGeneral<>(50.0);
+        ArbolGeneral<String> hijoH = new ArbolGeneral<>("H");
+        ArbolGeneral<String> hijoI = new ArbolGeneral<>("I");
+        ArbolGeneral<String> hijoJ = new ArbolGeneral<>( "J");
+        ArbolGeneral<String> hijoK = new ArbolGeneral<>( "K");
+        ArbolGeneral<String> hijoO = new ArbolGeneral<>( "O");
 
 
-        ArbolGeneral<Double> hijoL = new ArbolGeneral<>(125.0);
-        ArbolGeneral<Double> hijoM = new ArbolGeneral<>(25.0);
-        ArbolGeneral<Double> hijoN = new ArbolGeneral<>(25.0);
+        ArbolGeneral<String> hijoL = new ArbolGeneral<>( "L");
+        ArbolGeneral<String> hijoM = new ArbolGeneral<>( "M");
+        ArbolGeneral<String> hijoN = new ArbolGeneral<>( "N");
 
         hijoC.agregarHijo(hijoF);
         hijoC.agregarHijo(hijoG);
@@ -95,10 +78,10 @@ public class RedDeAguaPotable {
         arbol.agregarHijo(hijoD);
         arbol.agregarHijo(hijoE);
 
-        var red = new RedDeAguaPotable(arbol);
+        var red = new RedDeAguaPotable();
 
 
 
-        red.minimoCaudal(1000.0);
+        System.out.println(red.minimoCaudal(1000.0, arbol));
     }
 }

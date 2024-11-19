@@ -5,49 +5,59 @@ import practica2.ejercicio3.ArbolGeneral;
 
 
 public class AnalizadorArbol {
-     public int devolverMaximoPromedio(ArbolGeneral<AreaEmpresa> arbol) {
-            if (arbol.esVacio()) { //verifico si el arbol esta vacio
-                return 0; // en caso de estarlo el maximo promedio es cero
-            }
-            int maxPromedio = 0; // se inicializa en cero el maximo promedio
-            ColaGenerica<ArbolGeneral<AreaEmpresa>> cola = new ColaGenerica<>();
-            cola.encolar(arbol); // encolamos el nodo raiz
+    public int devolverMaximoPromedio(ArbolGeneral<AreaEmpresa> arbol) {
+        if (arbol == null) {
+            return 0;
+        }
 
-            cola.encolar(null); // encolamos null para determinar el final de un nivel
+        ListaGenerica<ArbolGeneral<AreaEmpresa>> listaDeHijos;
+        ColaGenerica<ArbolGeneral<AreaEmpresa>> cola = new ColaGenerica<>();
+        cola.encolar(arbol);
+        cola.encolar(null); // Usamos null como delimitador de nivel
 
-            int sumaNivel = 0; // suma nivel es el total de todos los valores del nivel
-            int contadorNivel = 0;
+        int sumaDeNivel = 0;
+        int cantidadDeNodosNivel = 0;
+        double maxPromedio = 0;
 
-            while (!cola.esVacia()) { // se recorre hasta que la cola se encuentre vacia
-                ArbolGeneral<AreaEmpresa> nodoActual = cola.desencolar(); // el nodo actual toma el valor del ultimo nodo encolado
-                if (nodoActual != null) { // si el nodo actual no es null -> final o separador
-                    sumaNivel += nodoActual.getDato().getTiempoDeTransmision(); // se van sumando los valores del nodo
-                    contadorNivel++; // se sube el nivel
-                    ListaGenerica<ArbolGeneral<AreaEmpresa>> listaHijos = nodoActual.getHijos(); // le pasamos los hijos del nodo actual
-                    listaHijos.comenzar(); // lo inicialiazamos
-                    while (!listaHijos.fin()){ // mientras no sea el final de la lista de hijos
-                        cola.encolar(listaHijos.proximo()); // se encolan todos los hijos
-                    }
-                } else { // si el nodo es null -> llego al final de la lista / separador (ES EL FIN DEL NIVEL)
-                    if (contadorNivel > 0) {
-                        int promedioNivel = sumaNivel / contadorNivel;
-                        maxPromedio = Math.max(maxPromedio, promedioNivel); // -> APLICAR METODO PARA HACER EL CALCULO
-                    }
+        while (!cola.esVacia()) {
+            ArbolGeneral<AreaEmpresa> nodo = cola.desencolar();
 
-                    // Preparar para el siguiente nivel
-                    sumaNivel = 0;
-                    contadorNivel = 0;
+            if (nodo == null) {
+                // Fin del nivel actual
+                double promedioNivel = sumaDeNivel / (double) cantidadDeNodosNivel;
+                if (promedioNivel > maxPromedio) {
+                    maxPromedio = promedioNivel;
+                }
 
-                    if (!cola.esVacia()) {
-                        cola.encolar(null); // Marcador para el siguiente nivel
+                // Reiniciar para el siguiente nivel
+                sumaDeNivel = 0;
+                cantidadDeNodosNivel = 0;
+
+                // Si aún hay elementos en la cola, encolar el delimitador para el próximo nivel
+                if (!cola.esVacia()) {
+                    cola.encolar(null);
+                }
+            } else {
+                // Procesar el nodo actual
+                sumaDeNivel += nodo.getDato().getTiempoDeTransmision(); // Suponiendo que getValor() obtiene el valor del dato
+                cantidadDeNodosNivel++;
+
+                // Encolar los hijos del nodo actual
+                if (nodo.tieneHijos()) {
+                    listaDeHijos = nodo.getHijos();
+                    listaDeHijos.comenzar();
+                    while (!listaDeHijos.fin()) {
+                        cola.encolar(listaDeHijos.proximo());
                     }
                 }
             }
-
-            return maxPromedio;
         }
 
-        public static void main(String[] args) {
+        return (int) maxPromedio;
+    }
+
+
+    public static void main(String[] args) {
         var analizador = new AnalizadorArbol();
 
         ArbolGeneral<AreaEmpresa> arbol = new ArbolGeneral<>(new AreaEmpresa("M", 14));

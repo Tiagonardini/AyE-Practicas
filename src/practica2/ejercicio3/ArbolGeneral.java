@@ -3,7 +3,6 @@ package practica2.ejercicio3;
 import practica1.ejercicio3.ColaGenerica;
 import practica1.ejercicio3.ListaEnlazadaGenerica;
 import practica1.ejercicio3.ListaGenerica;
-import practica2.ejercicio4.AreaEmpresa;
 
 public class ArbolGeneral<T> {
 
@@ -38,7 +37,7 @@ public class ArbolGeneral<T> {
 			this.hijos = hijos;
 	}
 
-	public ListaGenerica<ArbolGeneral<T>> getHijos() {
+	public ListaGenerica getHijos() {
 		return this.hijos;
 	}
 

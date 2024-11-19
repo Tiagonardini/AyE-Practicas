@@ -1,0 +1,11 @@
+
+Indique qué estrategia (recorrido en profundidad o por niveles) utilizará para resolver el problema.
+
+Para calcular el mayor retardo posible en el camino desde la raíz hasta las hojas en una red binaria llena,
+la estrategia más adecuada sería utilizar un recorrido en profundidad (DFS). Esta elección se basa en que necesitamos
+explorar todos los caminos posibles desde la raíz hasta las hojas, acumulando los retardos en cada paso.
+El recorrido en profundidad nos permite seguir cada camino de manera natural, sumando los retardos de los nodos visitados
+hasta llegar a una hoja, y luego retroceder para explorar otros caminos. Al finalizar el recorrido, habremos calculado
+el retardo total para cada camino posible, permitiéndonos determinar cuál es el mayor. Esta estrategia es eficiente para
+este problema porque explora sistemáticamente todos los caminos necesarios sin procesar información innecesaria, y se adapta
+bien a la estructura jerárquica del árbol binario lleno.
